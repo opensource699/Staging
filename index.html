@@ -28,6 +28,8 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             overflow: hidden;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
         
         .status-bar {
@@ -39,6 +41,8 @@
             font-weight: 600;
             background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
             color: white;
+            flex-shrink: 0;
+            z-index: 100;
         }
 
         .logo-container {
@@ -59,25 +63,32 @@
         }
         
         .screen {
-            padding: 50px 30px;
-            height: calc(100% - 80px);
+            flex: 1;
             display: none;
             flex-direction: column;
-            overflow-y: auto;
+            position: relative;
         }
         
-        .screen.with-nav {
-            height: calc(100% - 160px);
+        .screen.active {
+            display: flex;
         }
         
         .auth-screen, .forgot-password-screen {
             justify-content: center;
             text-align: center;
-            height: 100%;
+            padding: 50px 30px;
+            overflow-y: auto;
         }
         
-        .screen.active {
-            display: flex;
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .screen.with-nav .main-content {
+            height: 100%;
         }
         
         .app-title {
@@ -217,6 +228,81 @@
         
         .back-to-login:hover {
             text-decoration: underline;
+        }
+
+        /* Notification System */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .notification {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-left: 4px solid #667eea;
+            transform: translateX(100%);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: auto;
+            max-width: 300px;
+            cursor: pointer;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .notification.like {
+            border-left-color: #ff6b6b;
+        }
+
+        .notification.match {
+            border-left-color: #27ae60;
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .notification-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .notification-body {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .notification-close {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 16px;
         }
 
         /* Tinder-style card interface */
@@ -460,7 +546,7 @@
         }
         
         .bottom-nav {
-            position: absolute;
+            position: sticky;
             bottom: 0;
             left: 0;
             right: 0;
@@ -471,6 +557,8 @@
             align-items: center;
             border-top: 1px solid #f0f0f0;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+            z-index: 50;
         }
         
         .bottom-nav.visible {
@@ -521,7 +609,7 @@
         
         .logout-btn {
             position: absolute;
-            top: 60px;
+            top: 20px;
             right: 20px;
             padding: 8px 16px;
             background: #ff6b6b;
@@ -530,11 +618,11 @@
             border-radius: 8px;
             font-size: 12px;
             cursor: pointer;
+            z-index: 10;
         }
 
-        /* Profile Edit Screen styles - keeping existing styles */
+        /* Profile Edit Screen styles */
         .profile-edit-screen {
-            padding: 0;
             background: #f8f9fa;
         }
         
@@ -586,8 +674,6 @@
         
         .edit-content {
             padding: 0;
-            height: calc(100% - 60px);
-            overflow-y: auto;
         }
         
         .profile-photo-section {
@@ -851,6 +937,7 @@
         .messages-list {
             flex: 1;
             overflow-y: auto;
+            padding: 20px;
         }
         
         .message-item {
@@ -892,6 +979,16 @@
             font-size: 12px;
             color: #999;
         }
+
+        .matches-container {
+            padding: 20px;
+        }
+
+        .matches-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
         
         /* Loading spinner */
         .spinner {
@@ -918,6 +1015,7 @@
             margin: 20px;
             text-align: center;
             font-size: 14px;
+            flex-shrink: 0;
         }
         
         .verify-btn {
@@ -947,6 +1045,9 @@
             </div>
             <span id="statusTime">9:41</span>
         </div>
+
+        <!-- Notification Container -->
+        <div id="notificationContainer" class="notification-container"></div>
         
         <!-- Email Verification Notice -->
         <div id="verificationNotice" class="email-verification-notice" style="display: none;">
@@ -1034,29 +1135,31 @@
         
         <!-- Home Screen with Tinder-style cards -->
         <div id="homeScreen" class="screen with-nav">
-            <button id="logoutBtn" class="logout-btn">Logout</button>
-            
-            <div class="cards-container" id="cardsContainer">
-                <!-- Cards will be dynamically loaded here -->
-                <div class="no-more-cards" id="noMoreCards" style="display: none;">
-                    <div class="no-more-icon">🎯</div>
-                    <div class="empty-state-text">No more profiles</div>
-                    <div class="empty-state-subtext">Check back later for new matches!</div>
+            <div class="main-content">
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+                
+                <div class="cards-container" id="cardsContainer">
+                    <!-- Cards will be dynamically loaded here -->
+                    <div class="no-more-cards" id="noMoreCards" style="display: none;">
+                        <div class="no-more-icon">🎯</div>
+                        <div class="empty-state-text">No more profiles</div>
+                        <div class="empty-state-subtext">Check back later for new matches!</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="swipe-actions" id="swipeActions" style="display: none;">
-                <button class="swipe-btn reject-btn" id="rejectBtn">❌</button>
-                <button class="swipe-btn super-like-btn" id="superLikeBtn">⭐</button>
-                <button class="swipe-btn like-btn" id="likeBtn">💖</button>
+                <div class="swipe-actions" id="swipeActions" style="display: none;">
+                    <button class="swipe-btn reject-btn" id="rejectBtn">❌</button>
+                    <button class="swipe-btn super-like-btn" id="superLikeBtn">⭐</button>
+                    <button class="swipe-btn like-btn" id="likeBtn">💖</button>
+                </div>
             </div>
         </div>
         
         <!-- Messages Screen -->
         <div id="messagesScreen" class="screen with-nav">
-            <div style="padding: 20px 0;">
-                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Messages</h2>
+            <div class="main-content">
                 <div class="messages-list" id="messagesList">
+                    <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; padding: 20px 20px 0;">Messages</h2>
                     <div class="empty-state">
                         <div class="empty-state-icon">💬</div>
                         <div class="empty-state-text">No messages yet</div>
@@ -1068,13 +1171,15 @@
         
         <!-- Matches Screen -->
         <div id="matchesScreen" class="screen with-nav">
-            <div style="padding: 20px 0;">
-                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Your Matches</h2>
-                <div id="matchesGrid">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">💝</div>
-                        <div class="empty-state-text">No matches yet</div>
-                        <div class="empty-state-subtext">Keep swiping to find your perfect match!</div>
+            <div class="main-content">
+                <div class="matches-container">
+                    <h2 class="matches-title">Your Matches</h2>
+                    <div id="matchesGrid">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">💝</div>
+                            <div class="empty-state-text">No matches yet</div>
+                            <div class="empty-state-subtext">Keep swiping to find your perfect match!</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1095,7 +1200,7 @@
         </div>
         
         <!-- Instagram-style Profile Edit Screen -->
-        <div id="profileEditScreen" class="screen profile-edit-screen">
+        <div id="profileEditScreen" class="screen with-nav profile-edit-screen">
             <div class="edit-header">
                 <div class="edit-header-left">
                     <button class="edit-back-btn" id="editBackBtn">×</button>
@@ -1104,67 +1209,69 @@
                 <button class="save-btn" id="saveProfileBtn">Save</button>
             </div>
             
-            <div class="edit-content">
-                <!-- Profile Photo Section -->
-                <div class="profile-photo-section">
-                    <div class="photo-container">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%23e9ecef'/><circle cx='40' cy='32' r='12' fill='%23adb5bd'/><path d='M20 60c0-11 9-20 20-20s20 9 20 20' fill='%23adb5bd'/></svg>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
+            <div class="main-content">
+                <div class="edit-content">
+                    <!-- Profile Photo Section -->
+                    <div class="profile-photo-section">
+                        <div class="photo-container">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%23e9ecef'/><circle cx='40' cy='32' r='12' fill='%23adb5bd'/><path d='M20 60c0-11 9-20 20-20s20 9 20 20' fill='%23adb5bd'/></svg>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
+                        </div>
+                        <div class="photo-info">
+                            <div class="photo-name" id="photoName">Loading...</div>
+                            <button class="change-photo-btn" id="changePhotoBtn">Change profile photo</button>
+                            <input type="file" id="photoFileInput" class="hidden-file-input" accept="image/*">
+                        </div>
                     </div>
-                    <div class="photo-info">
-                        <div class="photo-name" id="photoName">Loading...</div>
-                        <button class="change-photo-btn" id="changePhotoBtn">Change profile photo</button>
-                        <input type="file" id="photoFileInput" class="hidden-file-input" accept="image/*">
+                    
+                    <!-- Basic Info Section -->
+                    <div class="edit-section">
+                        <div class="edit-field">
+                            <span class="field-label">Name</span>
+                            <input type="text" class="field-input" id="editName" placeholder="Your name">
+                        </div>
+                        <div class="edit-field">
+                            <span class="field-label">Age</span>
+                            <input type="number" class="field-input" id="editAge" min="18" max="50" placeholder="Age">
+                        </div>
+                        <div class="edit-field">
+                            <span class="field-label">Gender</span>
+                            <select class="field-input" id="editGender">
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="non-binary">Non-binary</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="edit-field">
+                            <span class="field-label">Enrollment</span>
+                            <input type="text" class="field-input" id="editEnrollment" placeholder="ADTU/Year/Branch/Number">
+                        </div>
+                    </div>
+                    
+                    <!-- Bio Section -->
+                    <div class="edit-section">
+                        <div class="edit-field">
+                            <span class="field-label">Bio</span>
+                            <textarea class="bio-input" id="editBio" placeholder="Write something about yourself..." maxlength="150"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Interests Section -->
+                    <div class="interests-section">
+                        <div class="interests-header">
+                            <div class="interests-title">Interests</div>
+                            <button class="add-interest-btn" id="addInterestBtn">Add Interest</button>
+                        </div>
+                        <div class="interests-grid" id="interestsGrid">
+                            <!-- Interests will be dynamically added here -->
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Basic Info Section -->
-                <div class="edit-section">
-                    <div class="edit-field">
-                        <span class="field-label">Name</span>
-                        <input type="text" class="field-input" id="editName" placeholder="Your name">
-                    </div>
-                    <div class="edit-field">
-                        <span class="field-label">Age</span>
-                        <input type="number" class="field-input" id="editAge" min="18" max="50" placeholder="Age">
-                    </div>
-                    <div class="edit-field">
-                        <span class="field-label">Gender</span>
-                        <select class="field-input" id="editGender">
-                            <option value="">Select gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="non-binary">Non-binary</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="edit-field">
-                        <span class="field-label">Enrollment</span>
-                        <input type="text" class="field-input" id="editEnrollment" placeholder="ADTU/Year/Branch/Number">
-                    </div>
-                </div>
-                
-                <!-- Bio Section -->
-                <div class="edit-section">
-                    <div class="edit-field">
-                        <span class="field-label">Bio</span>
-                        <textarea class="bio-input" id="editBio" placeholder="Write something about yourself..." maxlength="150"></textarea>
-                    </div>
-                </div>
-                
-                <!-- Interests Section -->
-                <div class="interests-section">
-                    <div class="interests-header">
-                        <div class="interests-title">Interests</div>
-                        <button class="add-interest-btn" id="addInterestBtn">Add Interest</button>
-                    </div>
-                    <div class="interests-grid" id="interestsGrid">
-                        <!-- Interests will be dynamically added here -->
-                    </div>
-                </div>
+                <div id="editErrorMessage" class="error-message" style="display: none;"></div>
+                <div id="editSuccessMessage" class="success-message" style="display: none;"></div>
             </div>
-            
-            <div id="editErrorMessage" class="error-message" style="display: none;"></div>
-            <div id="editSuccessMessage" class="success-message" style="display: none;"></div>
         </div>
         
         <!-- Add Interest Modal -->
@@ -1235,6 +1342,7 @@
         const bottomNav = document.getElementById('bottomNav');
         const interestModal = document.getElementById('interestModal');
         const matchNotification = document.getElementById('matchNotification');
+        const notificationContainer = document.getElementById('notificationContainer');
 
         // Global state
         let isSignUp = false;
@@ -1247,6 +1355,55 @@
         let startX = 0;
         let currentX = 0;
         let cardStack = [];
+        let notificationId = 0;
+
+        // Notification System
+        function showNotification(type, title, message, avatar = null) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.id = `notification-${++notificationId}`;
+            
+            notification.innerHTML = `
+                <button class="notification-close" onclick="hideNotification('${notification.id}')">×</button>
+                <div class="notification-header">
+                    ${avatar ? `<img src="${avatar}" alt="Avatar" class="notification-avatar">` : ''}
+                    <div class="notification-title">${title}</div>
+                </div>
+                <div class="notification-body">${message}</div>
+            `;
+
+            notificationContainer.appendChild(notification);
+
+            // Show notification with animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                hideNotification(notification.id);
+            }, 5000);
+
+            // Click to dismiss
+            notification.addEventListener('click', () => {
+                hideNotification(notification.id);
+            });
+
+            return notification.id;
+        }
+
+        function hideNotification(notificationId) {
+            const notification = document.getElementById(notificationId);
+            if (notification) {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }
+        }
+
+        // Make hideNotification globally available
+        window.hideNotification = hideNotification;
 
         // Utility functions
         function showScreen(screenId) {
@@ -1344,6 +1501,8 @@
                     swipedLeft: [], // Users they rejected
                     swipedRight: [], // Users they liked
                     matches: [], // Mutual matches
+                    receivedLikes: [], // Users who liked them
+                    sentLikes: [], // Users they liked
                     ...additionalData
                 };
                 
@@ -1395,6 +1554,82 @@
                 console.error('Error uploading photo:', error);
                 throw error;
             }
+        }
+
+        // Create notification for received likes
+        async function createLikeNotification(fromUserId, toUserId, type = 'like') {
+            try {
+                const notificationRef = collection(db, 'notifications');
+                await addDoc(notificationRef, {
+                    fromUserId,
+                    toUserId,
+                    type, // 'like', 'match', 'super_like'
+                    read: false,
+                    createdAt: serverTimestamp()
+                });
+            } catch (error) {
+                console.error('Error creating notification:', error);
+            }
+        }
+
+        // Listen for notifications
+        function listenForNotifications() {
+            if (!currentUser) return;
+
+            const notificationsRef = collection(db, 'notifications');
+            const q = query(
+                notificationsRef,
+                where('toUserId', '==', currentUser.uid),
+                where('read', '==', false),
+                orderBy('createdAt', 'desc')
+            );
+
+            const unsubscribe = onSnapshot(q, async (snapshot) => {
+                for (const docChange of snapshot.docChanges()) {
+                    if (docChange.type === 'added') {
+                        const notification = docChange.doc.data();
+                        const fromUserProfile = await getUserProfile(notification.fromUserId);
+                        
+                        if (fromUserProfile) {
+                            let title = '';
+                            let message = '';
+                            let notificationType = 'like';
+
+                            switch (notification.type) {
+                                case 'like':
+                                    title = 'Someone likes you! 💖';
+                                    message = `${fromUserProfile.displayName || 'Someone'} liked your profile`;
+                                    notificationType = 'like';
+                                    break;
+                                case 'super_like':
+                                    title = 'You got a Super Like! ⭐';
+                                    message = `${fromUserProfile.displayName || 'Someone'} super liked you`;
+                                    notificationType = 'like';
+                                    break;
+                                case 'match':
+                                    title = 'New Match! 🎉';
+                                    message = `You and ${fromUserProfile.displayName || 'someone'} liked each other`;
+                                    notificationType = 'match';
+                                    break;
+                            }
+
+                            showNotification(
+                                notificationType,
+                                title,
+                                message,
+                                fromUserProfile.photoURL
+                            );
+
+                            // Mark as read
+                            await updateDoc(doc(db, 'notifications', docChange.doc.id), {
+                                read: true
+                            });
+                        }
+                    }
+                }
+            });
+
+            return unsubscribe;
         }
 
         // Load other users for swiping
@@ -1554,12 +1789,16 @@
                 card.classList.remove('dragging');
                 
                 const deltaX = currentX - startX;
+                const deltaY = currentY - startY;
                 const threshold = 100;
                 
                 if (Math.abs(deltaX) > threshold) {
-                    // Swipe detected
+                    // Horizontal swipe
                     const direction = deltaX > 0 ? 'right' : 'left';
                     swipeCard(direction);
+                } else if (deltaY < -threshold) {
+                    // Upward swipe for super like
+                    swipeCard('super');
                 } else {
                     // Return to center
                     card.style.transform = '';
@@ -1577,11 +1816,26 @@
             const swipedProfile = availableProfiles[currentCardIndex];
 
             // Animate card out
-            topCard.classList.add(`swiping-${direction}`);
+            if (direction === 'super') {
+                topCard.style.transform = 'translateY(-100%) scale(0.8)';
+                topCard.style.opacity = '0';
+            } else {
+                topCard.classList.add(`swiping-${direction}`);
+            }
 
             try {
                 // Update user's swipe data
-                const swipeField = direction === 'left' ? 'swipedLeft' : 'swipedRight';
+                let swipeField = 'swipedLeft';
+                let likeType = null;
+
+                if (direction === 'right') {
+                    swipeField = 'swipedRight';
+                    likeType = 'like';
+                } else if (direction === 'super') {
+                    swipeField = 'swipedRight';
+                    likeType = 'super_like';
+                }
+
                 const updatedSwipes = [...(userProfile[swipeField] || []), profileUid];
                 
                 await updateUserProfile(currentUser.uid, {
@@ -1590,8 +1844,25 @@
 
                 userProfile[swipeField] = updatedSwipes;
 
-                // Check for match if swiped right
-                if (direction === 'right') {
+                // If liked or super liked, create notification and check for match
+                if (likeType) {
+                    // Update sent likes
+                    const updatedSentLikes = [...(userProfile.sentLikes || []), profileUid];
+                    await updateUserProfile(currentUser.uid, {
+                        sentLikes: updatedSentLikes
+                    });
+                    userProfile.sentLikes = updatedSentLikes;
+
+                    // Update target user's received likes
+                    const updatedReceivedLikes = [...(swipedProfile.receivedLikes || []), currentUser.uid];
+                    await updateUserProfile(profileUid, {
+                        receivedLikes: updatedReceivedLikes
+                    });
+
+                    // Create notification for the liked user
+                    await createLikeNotification(currentUser.uid, profileUid, likeType);
+
+                    // Check for match
                     await checkForMatch(profileUid, swipedProfile);
                 }
 
@@ -1636,6 +1907,10 @@
 
                 userProfile.matches = currentUserMatches;
 
+                // Create match notification for both users
+                await createLikeNotification(currentUser.uid, otherUserId, 'match');
+                await createLikeNotification(otherUserId, currentUser.uid, 'match');
+
                 // Show match notification
                 showMatchNotification(otherUserProfile);
 
@@ -1672,8 +1947,7 @@
         });
 
         document.getElementById('superLikeBtn').addEventListener('click', () => {
-            // For now, treat as regular like
-            swipeCard('right');
+            swipeCard('super');
         });
 
         // Auth functions
@@ -1855,9 +2129,9 @@
             if (currentUser && !currentUser.emailVerified) {
                 try {
                     await sendEmailVerification(currentUser);
-                    alert('Verification email sent!');
+                    showNotification('success', 'Email Sent!', 'Verification email sent successfully');
                 } catch (error) {
-                    alert('Failed to send verification email');
+                    showNotification('error', 'Error', 'Failed to send verification email');
                 }
             }
         });
@@ -1966,6 +2240,8 @@
 
                     changeBtn.textContent = 'Change profile photo';
                     changeBtn.disabled = false;
+
+                    showNotification('success', 'Photo Updated!', 'Profile photo updated successfully');
                 } catch (error) {
                     console.error('Error uploading photo:', error);
                     showError('editErrorMessage', 'Failed to upload photo');
@@ -2036,7 +2312,7 @@
                 // Update local profile
                 userProfile = { ...userProfile, ...updateData };
 
-                showSuccess('editSuccessMessage', 'Profile updated successfully!');
+                showNotification('success', 'Profile Saved!', 'Your profile has been updated successfully');
 
                 setTimeout(() => {
                     hideSuccess('editSuccessMessage');
@@ -2172,6 +2448,7 @@
         function loadMessages() {
             const messagesList = document.getElementById('messagesList');
             messagesList.innerHTML = `
+                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; padding: 20px 20px 0;">Messages</h2>
                 <div class="empty-state">
                     <div class="empty-state-icon">💬</div>
                     <div class="empty-state-text">No messages yet</div>
@@ -2179,6 +2456,9 @@
                 </div>
             `;
         }
+
+        // Notification listener variable
+        let notificationListener = null;
 
         // Auth state observer
         onAuthStateChanged(auth, async (user) => {
@@ -2207,6 +2487,12 @@
                         lastActive: serverTimestamp() 
                     });
 
+                    // Start listening for notifications
+                    if (notificationListener) {
+                        notificationListener(); // Stop previous listener
+                    }
+                    notificationListener = listenForNotifications();
+
                     // Load available profiles for swiping
                     loadAvailableProfiles();
 
@@ -2223,6 +2509,13 @@
                 userProfile = null;
                 availableProfiles = [];
                 currentCardIndex = 0;
+                
+                // Stop notification listener
+                if (notificationListener) {
+                    notificationListener();
+                    notificationListener = null;
+                }
+
                 verificationNotice.style.display = 'none';
                 hideBottomNav();
                 showScreen('authScreen');
@@ -2294,7 +2587,7 @@
                         break;
                     case 'ArrowUp':
                         e.preventDefault();
-                        swipeCard('right'); // Super like
+                        swipeCard('super');
                         break;
                 }
             }

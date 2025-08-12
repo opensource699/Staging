@@ -1983,7 +1983,7 @@
 
             try {
                 await sendPasswordResetEmail(auth, email);
-                showSuccess('resetSuccessMessage', 'Password reset email sent! Check your inbox.');
+                showSuccess('resetSuccessMessage', 'Password reset email sent! Check your inbox including the spam or junk folder.');
                 document.getElementById('resetEmail').value = '';
                 setTimeout(() => showScreen('authScreen'), 3000);
             } catch (error) {
@@ -2968,4 +2968,5 @@
 </body>
 
 </html>
+
 

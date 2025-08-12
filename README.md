@@ -16,6 +16,8 @@ Frontend ✓
 
 Database ✓
 
+Authentication ✓
+
 [Backend wip](https://gprivate.com/6hybx)
 
 [Storage wip ](https://gprivate.com/6hybz)

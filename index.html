@@ -2066,7 +2066,7 @@
                     await signInWithEmailAndPassword(auth, email, password);
                 }
             } catch (error) {
-                let errorMsg = 'Authentication failed';
+                let errorMsg = 'Invalid email or password';
                 switch (error.code) {
                     case 'auth/email-already-in-use':
                         errorMsg = 'Email already in use';
@@ -2968,5 +2968,6 @@
 </body>
 
 </html>
+
 
 

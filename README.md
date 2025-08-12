@@ -14,8 +14,8 @@ UI ✓
 
 Frontend ✓
 
-[Backend wip](https://gprivate.com/6hybx)
+Database ✓
 
-[Database wip](https://gprivate.com/6hyby)
+[Backend wip](https://gprivate.com/6hybx)
 
 [Storage wip ](https://gprivate.com/6hybz)

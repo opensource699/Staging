@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -10,17 +11,17 @@
             padding: 0;
             -webkit-tap-highlight-color: transparent;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-           /* min-height: 100vh; */
+            /* min-height: 100vh; */
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-        
+
         .app-container {
             width: 100vw;
             height: 100vh;
@@ -30,16 +31,16 @@
             overflow: hidden;
             border-radius: 0;
         }
-        
+
         /* Mobile specific adjustments */
         @media (min-width: 431px) {
             .app-container {
                 border-radius: 25px;
                 height: 932px;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             }
         }
-        
+
         .status-bar {
             display: flex;
             justify-content: space-between;
@@ -70,7 +71,7 @@
             justify-content: center;
             font-size: 20px;
         }
-        
+
         .screen {
             position: absolute;
             top: 0;
@@ -82,32 +83,34 @@
             flex-direction: column;
             background: white;
         }
-        
+
         .screen.with-nav {
             padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
         }
-        
-        .auth-screen, .forgot-password-screen {
+
+        .auth-screen,
+        .forgot-password-screen {
             justify-content: center;
             text-align: center;
             padding: 50px 30px calc(50px + env(safe-area-inset-bottom, 0px));
         }
-        
+
         .screen.active {
             display: flex;
         }
-        
+
         .scrollable-content {
             flex: 1;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
-        
+
         .content-padding {
-    padding: 65px 15px 10px 15px; /* top padding matches status bar height */
-    align-items: flex-start;
+            padding: 65px 15px 10px 15px;
+            /* top padding matches status bar height */
+            align-items: flex-start;
         }
-        
+
         .app-title {
             font-size: 32px;
             font-weight: 700;
@@ -116,27 +119,29 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
-        
+
         .app-subtitle {
             color: #666;
             font-size: 16px;
             margin-bottom: 40px;
         }
-        
+
         .form-group {
             margin-bottom: 20px;
             text-align: left;
             position: relative;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
             color: #333;
         }
-        
-        .form-group input, .form-group textarea, .form-group select {
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             width: 91%;
             padding: 15px;
             border: 2px solid #f0f0f0;
@@ -171,17 +176,19 @@
         .password-toggle:hover {
             color: #333;
         }
-        
+
         .form-group textarea {
             resize: vertical;
             min-height: 80px;
         }
-        
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #667eea;
         }
-        
+
         .auth-button {
             width: 100%;
             padding: 15px;
@@ -195,43 +202,44 @@
             transition: transform 0.2s;
             margin-bottom: 15px;
         }
-        
+
         .auth-button:hover {
             transform: translateY(-2px);
         }
-        
+
         .auth-button:disabled {
             opacity: 0.6;
             transform: none;
         }
-        
-        .switch-auth, .forgot-password-link {
+
+        .switch-auth,
+        .forgot-password-link {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
         }
-        
+
         .forgot-password-link {
             font-size: 14px;
             display: block;
             margin-bottom: 20px;
             text-align: center;
         }
-        
+
         .error-message {
             color: #e74c3c;
             font-size: 14px;
             margin-top: 10px;
             text-align: center;
         }
-        
+
         .success-message {
             color: #27ae60;
             font-size: 14px;
             margin-top: 10px;
             text-align: center;
         }
-        
+
         .back-to-login {
             color: #667eea;
             text-decoration: none;
@@ -242,7 +250,7 @@
             gap: 5px;
             margin-top: 20px;
         }
-        
+
         .back-to-login:hover {
             text-decoration: underline;
         }
@@ -267,7 +275,7 @@
             height: 500px;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             cursor: grab;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
@@ -310,7 +318,7 @@
             left: 0;
             right: 0;
             height: 50%;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
         }
 
         .card-info {
@@ -349,7 +357,7 @@
         }
 
         .card-interest-tag {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 4px 8px;
             border-radius: 12px;
             font-size: 12px;
@@ -377,7 +385,7 @@
             justify-content: center;
             font-size: 24px;
             transition: transform 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .swipe-btn:hover {
@@ -438,7 +446,7 @@
             font-size: 48px;
             font-weight: 700;
             margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .match-subtitle {
@@ -460,7 +468,7 @@
             height: 100px;
             border-radius: 50%;
             border: 4px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .match-heart {
@@ -480,15 +488,29 @@
         }
 
         @keyframes matchPulse {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         @keyframes heartBeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
         }
-        
+
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -504,14 +526,14 @@
             padding-top: 10px;
             padding-bottom: env(safe-area-inset-bottom, 10px);
             border-top: 1px solid #f0f0f0;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
             z-index: 50;
         }
-        
+
         .bottom-nav.visible {
             display: flex;
         }
-        
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -522,50 +544,53 @@
             border-radius: 12px;
             min-width: 60px;
         }
-        
+
         .nav-icon {
             font-size: 22px;
             margin-bottom: 4px;
             transition: transform 0.2s ease;
         }
-        
+
         .nav-label {
             font-size: 11px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .nav-item {
             color: #999;
         }
-        
+
         .nav-item.active {
             color: #667eea;
             background: rgba(102, 126, 234, 0.1);
         }
-        
+
         .nav-item.active .nav-icon {
             transform: scale(1.1);
         }
-        
+
         .nav-item:hover:not(.active) {
             color: #667eea;
             background: rgba(102, 126, 234, 0.05);
         }
-        
+
         .logout-btn {
-    position: absolute; /* keep it in place */
-    top: 10px; /* adjust as needed */
-    right: 20px;
-    padding: 8px 16px;
-    background-color: #ff4444; /* red logout button */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 12px;
-    cursor: pointer;
-    z-index: 9999;
+            position: absolute;
+            /* keep it in place */
+            top: 10px;
+            /* adjust as needed */
+            right: 20px;
+            padding: 8px 16px;
+            background-color: #ff4444;
+            /* red logout button */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            z-index: 9999;
         }
 
         /* Profile Section styles */
@@ -573,7 +598,7 @@
             padding-top: env(safe-area-inset-top, 0px);
             background: #f8f9fa;
         }
-        
+
         .profile-header {
             background: white;
             padding: 65px 30px 10px;
@@ -584,16 +609,19 @@
             position: sticky;
             top: 0;
             z-index: 10;
-            background-color: #222; /* dark gray */
-    color: white;
+            background-color: #222;
+            /* dark gray */
+            color: white;
         }
-        
+
         .profile-title {
             font-size: 18px;
             font-weight: 600;
         }
-        
-        .edit-btn, .save-btn, .cancel-btn {
+
+        .edit-btn,
+        .save-btn,
+        .cancel-btn {
             background: #667eea;
             color: white;
             border: none;
@@ -604,15 +632,16 @@
             font-size: 14px;
             margin-left: 10px;
         }
-        
+
         .cancel-btn {
             background: #6c757d;
         }
-        
-        .edit-btn:disabled, .save-btn:disabled {
+
+        .edit-btn:disabled,
+        .save-btn:disabled {
             opacity: 0.6;
         }
-        
+
         .profile-photo-section {
             background: white;
             padding: 20px;
@@ -621,13 +650,13 @@
             gap: 20px;
             border-bottom: 1px solid #e9ecef;
         }
-        
+
         .photo-container {
             position: relative;
             width: 80px;
             height: 80px;
         }
-        
+
         .profile-photo {
             width: 80px;
             height: 80px;
@@ -635,16 +664,16 @@
             object-fit: cover;
             border: 2px solid #e9ecef;
         }
-        
+
         .photo-info {
             flex: 1;
         }
-        
+
         .photo-name {
             font-weight: 600;
             margin-bottom: 5px;
         }
-        
+
         .change-photo-btn {
             color: #667eea;
             background: none;
@@ -653,12 +682,12 @@
             cursor: pointer;
             font-size: 14px;
         }
-        
+
         .profile-section {
             background: white;
             margin-bottom: 10px;
         }
-        
+
         .profile-field {
             padding: 15px 20px;
             border-bottom: 1px solid #e9ecef;
@@ -666,24 +695,24 @@
             align-items: center;
             justify-content: space-between;
         }
-        
+
         .profile-field:last-child {
             border-bottom: none;
         }
-        
+
         .field-label {
             font-weight: 500;
             color: #ffffff;
             min-width: 80px;
         }
-        
+
         .field-value {
             flex: 1;
             text-align: right;
             color: #a6a6a6;
             font-size: 16px;
         }
-        
+
         .field-input {
             flex: 1;
             background: none;
@@ -691,13 +720,13 @@
             font-size: 16px;
             text-align: right;
             color: #ffffff;
-            padding: 5px 0; 
+            padding: 5px 0;
         }
-        
+
         .field-input:focus {
             outline: none;
         }
-        
+
         .bio-input {
             width: 100%;
             min-height: 60px;
@@ -709,28 +738,28 @@
             font-family: inherit;
             padding: 5px 0;
         }
-        
+
         .bio-input:focus {
             outline: none;
         }
-        
+
         .interests-section {
             background: white;
             padding: 20px;
         }
-        
+
         .interests-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
-        
+
         .interests-title {
             font-weight: 600;
             font-size: 16px;
         }
-        
+
         .add-interest-btn {
             background: #667eea;
             color: white;
@@ -740,13 +769,13 @@
             font-size: 12px;
             cursor: pointer;
         }
-        
+
         .interests-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
-        
+
         .interest-chip {
             background: #f8f9fa;
             border: 1px solid #e9ecef;
@@ -757,13 +786,13 @@
             align-items: center;
             gap: 5px;
         }
-        
+
         .interest-chip.removable {
             background: #667eea;
             color: white;
             border-color: #667eea;
         }
-        
+
         .remove-interest {
             background: none;
             border: none;
@@ -772,7 +801,7 @@
             font-size: 16px;
             font-weight: bold;
         }
-        
+
         /* Modal styles */
         .modal {
             position: fixed;
@@ -780,18 +809,18 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
             padding: 20px;
         }
-        
+
         .modal.active {
             display: flex;
         }
-        
+
         .modal-content {
             background: white;
             border-radius: 12px;
@@ -799,14 +828,14 @@
             width: 100%;
             max-width: 300px;
         }
-        
+
         .modal-title {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 15px;
             text-align: center;
         }
-        
+
         .modal-input {
             width: 100%;
             padding: 12px;
@@ -815,17 +844,17 @@
             margin-bottom: 15px;
             font-size: 16px;
         }
-        
+
         .modal-input:focus {
             outline: none;
             border-color: #667eea;
         }
-        
+
         .modal-buttons {
             display: flex;
             gap: 10px;
         }
-        
+
         .modal-btn {
             flex: 1;
             padding: 12px;
@@ -834,49 +863,51 @@
             font-weight: 600;
             cursor: pointer;
         }
-        
+
         .modal-btn.primary {
             background: #667eea;
             color: white;
         }
-        
+
         .modal-btn.secondary {
             background: #f8f9fa;
             color: #666;
         }
-        
+
         .hidden-file-input {
             display: none;
         }
-        
+
         /* Empty state styles */
         .empty-state {
             text-align: center;
             padding: 40px 20px;
             color: #666;
         }
-        
+
         .empty-state-icon {
             font-size: 48px;
             margin-bottom: 15px;
         }
-        
+
         .empty-state-text {
             font-size: 16px;
             margin-bottom: 10px;
         }
-        
+
         .empty-state-subtext {
             font-size: 14px;
             color: #999;
         }
-        
+
         /* Messages and Matches */
-        .matches-list, .messages-list {
+        .matches-list,
+        .messages-list {
             padding: 0;
         }
-        
-        .match-item, .message-item {
+
+        .match-item,
+        .message-item {
             display: flex;
             align-items: center;
             padding: 15px 20px;
@@ -885,38 +916,43 @@
             transition: background-color 0.2s;
             background: white;
         }
-        
-        .match-item:hover, .message-item:hover {
+
+        .match-item:hover,
+        .message-item:hover {
             background-color: #f8f9fa;
         }
-        
-        .match-avatar, .message-avatar {
+
+        .match-avatar,
+        .message-avatar {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
             margin-right: 15px;
         }
-        
-        .match-content, .message-content {
+
+        .match-content,
+        .message-content {
             flex: 1;
         }
-        
-        .match-name, .message-name {
+
+        .match-name,
+        .message-name {
             font-weight: 600;
             margin-bottom: 5px;
         }
-        
-        .match-bio, .message-preview {
+
+        .match-bio,
+        .message-preview {
             color: #666;
             font-size: 14px;
         }
-        
+
         .message-time {
             font-size: 12px;
             color: #999;
         }
-        
+
         .match-status {
             color: #ff6b6b;
             font-size: 20px;
@@ -1024,7 +1060,7 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         /* Loading spinner */
         .spinner {
             border: 2px solid #f3f3f3;
@@ -1035,12 +1071,17 @@
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
-        
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        
+
         .email-verification-notice {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
@@ -1051,7 +1092,7 @@
             text-align: center;
             font-size: 14px;
         }
-        
+
         .verify-btn {
             background: #667eea;
             color: white;
@@ -1083,18 +1124,19 @@
             .status-bar {
                 padding-top: max(env(safe-area-inset-top, 10px), 10px);
             }
-            
+
             .bottom-nav {
                 height: max(calc(80px + env(safe-area-inset-bottom, 0px)), 80px);
                 padding-bottom: max(env(safe-area-inset-bottom, 10px), 10px);
             }
-            
+
             .screen.with-nav {
                 padding-bottom: max(calc(80px + env(safe-area-inset-bottom, 0px)), 80px);
             }
         }
     </style>
 </head>
+
 <body>
     <div class="app-container">
         <div class="status-bar">
@@ -1104,24 +1146,24 @@
             </div>
             <span id="statusTime">9:41</span>
         </div>
-        
+
         <!-- Email Verification Notice -->
         <div id="verificationNotice" class="email-verification-notice" style="display: none;">
             <div>📧 Please verify your email address to continue</div>
             <button id="resendVerificationBtn" class="verify-btn">Resend Verification Email</button>
         </div>
-        
+
         <!-- Auth Screen -->
         <div id="authScreen" class="screen auth-screen active">
             <div class="app-title">AdtU Crush Connect</div>
             <div class="app-subtitle">Start Your Dating Journey Today!</div>
-            
+
             <div id="authForm">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Enter your email">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="password-input-container">
@@ -1129,23 +1171,23 @@
                         <button type="button" class="password-toggle" id="passwordToggle">👁️</button>
                     </div>
                 </div>
-                
+
                 <div class="form-group" id="nameGroup" style="display: none;">
                     <label for="fullName">Full Name</label>
                     <input type="text" id="fullName" placeholder="Enter your full name">
                 </div>
-                
+
                 <div class="form-group" id="enrollmentGroup" style="display: none;">
                     <label for="enrollmentId">Enrollment ID</label>
                     <input type="text" id="enrollmentId" placeholder="e.g., ADTU/00/0000-00/Branch/000">
                     <div class="enrollment-hint">Format: ADTU/0-1/Year-End/Branch/Number</div>
                 </div>
-                
+
                 <div class="form-group" id="ageGroup" style="display: none;">
                     <label for="age">Age</label>
                     <input type="number" id="age" placeholder="Enter your age" min="18" max="50">
                 </div>
-                
+
                 <div class="form-group" id="genderGroup" style="display: none;">
                     <label for="gender">Gender</label>
                     <select id="gender">
@@ -1156,43 +1198,43 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
-                
+
                 <a href="#" id="forgotPasswordLink" class="forgot-password-link">Forgot Password?</a>
-                
+
                 <button id="authButton" class="auth-button">Sign In</button>
-                
+
                 <div>
                     <span id="switchText">Don't have an account? </span>
                     <a href="#" id="switchMode" class="switch-auth">Sign Up</a>
                 </div>
-                
+
                 <div id="errorMessage" class="error-message" style="display: none;"></div>
                 <div id="successMessage" class="success-message" style="display: none;"></div>
             </div>
         </div>
-        
+
         <!-- Forgot Password Screen -->
         <div id="forgotPasswordScreen" class="screen forgot-password-screen">
             <div class="app-title">Reset Password</div>
             <div class="app-subtitle">Enter your email to receive a password reset link</div>
-            
+
             <div class="form-group">
                 <label for="resetEmail">Email</label>
                 <input type="email" id="resetEmail" placeholder="Enter your email address">
             </div>
-            
+
             <button id="resetPasswordBtn" class="auth-button">Send Reset Link</button>
-            
+
             <a href="#" id="backToLogin" class="back-to-login">← Back to Login</a>
-            
+
             <div id="resetErrorMessage" class="error-message" style="display: none;"></div>
             <div id="resetSuccessMessage" class="success-message" style="display: none;"></div>
         </div>
-        
+
         <!-- Home Screen with Tinder-style cards -->
         <div id="homeScreen" class="screen with-nav">
             <button id="logoutBtn" class="logout-btn">Logout</button>
-            
+
             <div class="cards-container" id="cardsContainer">
                 <!-- Cards will be dynamically loaded here -->
                 <div class="no-more-cards" id="noMoreCards" style="display: none;">
@@ -1208,7 +1250,7 @@
                 <button class="swipe-btn like-btn" id="likeBtn">💖</button>
             </div>
         </div>
-        
+
         <!-- Messages Screen -->
         <div id="messagesScreen" class="screen with-nav">
             <div class="scrollable-content">
@@ -1224,7 +1266,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Matches Screen -->
         <div id="matchesScreen" class="screen with-nav">
             <div class="scrollable-content">
@@ -1240,7 +1282,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Profile Screen -->
         <div id="profileScreen" class="screen profile-screen with-nav">
             <div class="profile-header">
@@ -1249,23 +1291,25 @@
                     <button class="edit-btn" id="editProfileBtn">Edit</button>
                     <button class="save-btn" id="saveProfileBtn" style="display: none;">Save</button>
                     <button class="cancel-btn" id="cancelEditBtn" style="display: none;">Cancel</button>
-                    
+
                 </div>
             </div>
-            
+
             <div class="scrollable-content">
                 <!-- Profile Photo Section -->
                 <div class="profile-photo-section">
                     <div class="photo-container">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%23e9ecef'/><circle cx='40' cy='32' r='12' fill='%23adb5bd'/><path d='M20 60c0-11 9-20 20-20s20 9 20 20' fill='%23adb5bd'/></svg>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%23e9ecef'/><circle cx='40' cy='32' r='12' fill='%23adb5bd'/><path d='M20 60c0-11 9-20 20-20s20 9 20 20' fill='%23adb5bd'/></svg>"
+                            alt="Profile Photo" class="profile-photo" id="profilePhoto">
                     </div>
                     <div class="photo-info">
                         <div class="photo-name" id="photoName">Loading...</div>
-                        <button class="change-photo-btn" id="changePhotoBtn" style="display: none;">Change profile photo</button>
+                        <button class="change-photo-btn" id="changePhotoBtn" style="display: none;">Change profile
+                            photo</button>
                         <input type="file" id="photoFileInput" class="hidden-file-input" accept="image/*">
                     </div>
                 </div>
-                
+
                 <!-- Basic Info Section -->
                 <div class="profile-section">
                     <div class="profile-field readonly" id="nameField">
@@ -1296,34 +1340,36 @@
                         <span class="field-value" id="displayEnrollment">-</span>
                     </div>
                 </div>
-                
+
                 <!-- Bio Section -->
                 <div class="profile-section">
                     <div class="profile-field">
                         <span class="field-label">Bio</span>
                         <div style="flex: 1; text-align: right;">
                             <span class="field-value" id="displayBio">Tell us about yourself...</span>
-                            <textarea class="bio-input" id="editBio" placeholder="Write something about yourself..." maxlength="150" style="display: none;"></textarea>
+                            <textarea class="bio-input" id="editBio" placeholder="Write something about yourself..."
+                                maxlength="150" style="display: none;"></textarea>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Interests Section -->
                 <div class="interests-section">
                     <div class="interests-header">
                         <div class="interests-title">Interests</div>
-                        <button class="add-interest-btn" id="addInterestBtn" style="display: none;">Add Interest</button>
+                        <button class="add-interest-btn" id="addInterestBtn" style="display: none;">Add
+                            Interest</button>
                     </div>
                     <div class="interests-grid" id="interestsGrid">
                         <!-- Interests will be dynamically added here -->
                     </div>
                 </div>
             </div>
-            
+
             <div id="profileErrorMessage" class="error-message" style="display: none;"></div>
             <div id="profileSuccessMessage" class="success-message" style="display: none;"></div>
         </div>
-        
+
         <!-- Chat Screen -->
         <div id="chatScreen" class="screen chat-screen">
             <div class="chat-header">
@@ -1335,17 +1381,17 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="chat-messages" id="chatMessages">
                 <!-- Messages will be loaded here -->
             </div>
-            
+
             <div class="chat-input-container">
                 <input type="text" class="chat-input" id="chatInput" placeholder="Type a message...">
                 <button class="send-btn" id="sendBtn">→</button>
             </div>
         </div>
-        
+
         <!-- Match Notification Overlay -->
         <div id="matchNotification" class="match-notification">
             <div class="match-content">
@@ -1359,7 +1405,7 @@
                 <button class="continue-btn" id="continueBtn">Continue Swiping</button>
             </div>
         </div>
-        
+
         <!-- Add Interest Modal -->
         <div id="interestModal" class="modal">
             <div class="modal-content">
@@ -1371,7 +1417,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="bottom-nav" id="bottomNav">
             <div class="nav-item active" data-tab="home">
                 <div class="nav-icon">🏠</div>
@@ -1492,10 +1538,10 @@
 
         function updateStatusTime() {
             const now = new Date();
-            const time = now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                hour12: false 
+            const time = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
             });
             document.getElementById('statusTime').textContent = time;
         }
@@ -1508,7 +1554,7 @@
         document.getElementById('passwordToggle').addEventListener('click', () => {
             const passwordInput = document.getElementById('password');
             const toggleBtn = document.getElementById('passwordToggle');
-            
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleBtn.textContent = '🙈';
@@ -1543,7 +1589,7 @@
                     phone: '',
                     ...additionalData
                 };
-                
+
                 await setDoc(userRef, userData);
                 return userData;
             } catch (error) {
@@ -1556,7 +1602,7 @@
             try {
                 const userRef = doc(db, 'users', userId);
                 const userSnap = await getDoc(userRef);
-                
+
                 if (userSnap.exists()) {
                     return userSnap.data();
                 } else {
@@ -1601,20 +1647,20 @@
             try {
                 const usersRef = collection(db, 'users');
                 const q = query(
-                    usersRef, 
+                    usersRef,
                     where('uid', '!=', currentUser.uid),
                     limit(20)
                 );
-                
+
                 const querySnapshot = await getDocs(q);
                 availableProfiles = [];
-                
+
                 querySnapshot.forEach((doc) => {
                     const profile = doc.data();
                     // Filter out users already swiped
-                    const alreadySwiped = userProfile.swipedLeft?.includes(profile.uid) || 
-                                        userProfile.swipedRight?.includes(profile.uid);
-                    
+                    const alreadySwiped = userProfile.swipedLeft?.includes(profile.uid) ||
+                        userProfile.swipedRight?.includes(profile.uid);
+
                     if (!alreadySwiped && profile.profileComplete) {
                         availableProfiles.push(profile);
                     }
@@ -1644,9 +1690,9 @@
                         <div class="card-details">${profile.enrollmentId || 'AdtU Student'}</div>
                         <div class="card-bio">${profile.bio || 'Hey there! I\'m new to AdtU Crush Connect 👋'}</div>
                         <div class="card-interests">
-                            ${(profile.interests || []).slice(0, 3).map(interest => 
-                                `<div class="card-interest-tag">${interest}</div>`
-                            ).join('')}
+                            ${(profile.interests || []).slice(0, 3).map(interest =>
+                `<div class="card-interest-tag">${interest}</div>`
+            ).join('')}
                         </div>
                     </div>
                 </div>
@@ -1677,7 +1723,7 @@
             for (let i = 0; i < Math.min(3, availableProfiles.length - currentCardIndex); i++) {
                 const profile = availableProfiles[currentCardIndex + i];
                 const card = createProfileCard(profile);
-                
+
                 card.style.zIndex = 3 - i;
                 card.style.transform = `scale(${1 - i * 0.05}) translateY(${i * 10}px)`;
                 card.style.opacity = 1 - i * 0.1;
@@ -1713,10 +1759,10 @@
             function handleStart(e) {
                 isDragging = true;
                 card.classList.add('dragging');
-                
+
                 const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
                 const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
-                
+
                 startX = clientX;
                 startY = clientY;
                 currentX = clientX;
@@ -1725,34 +1771,34 @@
 
             function handleMove(e) {
                 if (!isDragging) return;
-                
+
                 e.preventDefault();
-                
+
                 const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
                 const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
-                
+
                 currentX = clientX;
                 currentY = clientY;
-                
+
                 const deltaX = currentX - startX;
                 const deltaY = currentY - startY;
-                
+
                 const rotation = deltaX * 0.1;
                 const opacity = 1 - Math.abs(deltaX) / 300;
-                
+
                 card.style.transform = `translateX(${deltaX}px) translateY(${deltaY}px) rotate(${rotation}deg)`;
                 card.style.opacity = Math.max(0.3, opacity);
             }
 
             function handleEnd() {
                 if (!isDragging) return;
-                
+
                 isDragging = false;
                 card.classList.remove('dragging');
-                
+
                 const deltaX = currentX - startX;
                 const threshold = 100;
-                
+
                 if (Math.abs(deltaX) > threshold) {
                     // Swipe detected
                     const direction = deltaX > 0 ? 'right' : 'left';
@@ -1780,7 +1826,7 @@
                 // Update user's swipe data
                 const swipeField = direction === 'left' ? 'swipedLeft' : 'swipedRight';
                 const updatedSwipes = [...(userProfile[swipeField] || []), profileUid];
-                
+
                 await updateUserProfile(currentUser.uid, {
                     [swipeField]: updatedSwipes
                 });
@@ -1877,7 +1923,7 @@
         document.getElementById('switchMode').addEventListener('click', (e) => {
             e.preventDefault();
             isSignUp = !isSignUp;
-            
+
             const authButton = document.getElementById('authButton');
             const switchText = document.getElementById('switchText');
             const switchMode = document.getElementById('switchMode');
@@ -1886,7 +1932,7 @@
             const ageGroup = document.getElementById('ageGroup');
             const genderGroup = document.getElementById('genderGroup');
             const forgotPasswordLink = document.getElementById('forgotPasswordLink');
-            
+
             if (isSignUp) {
                 authButton.textContent = 'Sign Up';
                 switchText.textContent = 'Already have an account? ';
@@ -2002,7 +2048,7 @@
                     await updateProfile(userCredential.user, {
                         displayName: fullName
                     });
-                    
+
                     // Create user profile in Firestore
                     await createUserProfile(userCredential.user, {
                         fullName,
@@ -2013,7 +2059,7 @@
                         interests: [],
                         profileComplete: false
                     });
-                    
+
                     await sendEmailVerification(userCredential.user);
                     showSuccess('successMessage', 'Account created! Please check your email for verification.');
                 } else {
@@ -2161,7 +2207,7 @@
                 userProfile.interests.forEach((interest, index) => {
                     const chip = document.createElement('div');
                     chip.className = isEditMode ? 'interest-chip removable' : 'interest-chip';
-                    
+
                     if (isEditMode) {
                         chip.innerHTML = `
                             ${interest}
@@ -2170,7 +2216,7 @@
                     } else {
                         chip.textContent = interest;
                     }
-                    
+
                     interestsGrid.appendChild(chip);
                 });
             } else if (!isEditMode) {
@@ -2182,7 +2228,7 @@
             }
         }
 
-        window.removeInterest = function(index) {
+        window.removeInterest = function (index) {
             if (userProfile.interests) {
                 userProfile.interests.splice(index, 1);
                 loadInterests();
@@ -2339,7 +2385,7 @@
                 } catch (error) {
                     console.error('Error uploading photo:', error);
                     showError('profileErrorMessage', 'Failed to upload photo');
-                    
+
                     const changeBtn = document.getElementById('changePhotoBtn');
                     changeBtn.textContent = 'Change profile photo';
                     changeBtn.disabled = false;
@@ -2355,7 +2401,7 @@
                 document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
                 item.classList.add('active');
 
-                switch(tab) {
+                switch (tab) {
                     case 'home':
                         showScreen('homeScreen');
                         if (availableProfiles.length === 0) {
@@ -2384,7 +2430,7 @@
             if (!userProfile || !userProfile.matches) return;
 
             const matchesList = document.getElementById('matchesList');
-            
+
             if (userProfile.matches.length === 0) {
                 matchesList.innerHTML = `
                     <div class="empty-state">
@@ -2398,7 +2444,7 @@
 
             try {
                 matchesList.innerHTML = '<div class="spinner"></div>';
-                
+
                 const matchProfiles = [];
                 for (const matchId of userProfile.matches) {
                     const profile = await getUserProfile(matchId);
@@ -2516,11 +2562,11 @@
         function sendMessage() {
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
-            
+
             if (!message || !currentChatUser) return;
 
             const chatMessages = document.getElementById('chatMessages');
-            
+
             // Remove empty state if present
             if (chatMessages.innerHTML.includes('You matched with')) {
                 chatMessages.innerHTML = '';
@@ -2563,16 +2609,16 @@
                 // Load user profile from Firestore
                 try {
                     userProfile = await getUserProfile(user.uid);
-                    
+
                     if (!userProfile) {
                         // Create profile if it doesn't exist
                         userProfile = await createUserProfile(user);
                     }
 
                     // Update online status
-                    await updateUserProfile(user.uid, { 
-                        isOnline: true, 
-                        lastActive: serverTimestamp() 
+                    await updateUserProfile(user.uid, {
+                        isOnline: true,
+                        lastActive: serverTimestamp()
                     });
 
                     // Load available profiles for swiping
@@ -2634,9 +2680,9 @@
         window.addEventListener('beforeunload', async () => {
             if (currentUser && userProfile) {
                 try {
-                    await updateUserProfile(currentUser.uid, { 
-                        isOnline: false, 
-                        lastActive: serverTimestamp() 
+                    await updateUserProfile(currentUser.uid, {
+                        isOnline: false,
+                        lastActive: serverTimestamp()
                     });
                 } catch (error) {
                     console.error('Error updating offline status:', error);
@@ -2645,7 +2691,7 @@
         });
 
         // Auto-resize bio textarea
-        document.getElementById('editBio').addEventListener('input', function() {
+        document.getElementById('editBio').addEventListener('input', function () {
             this.style.height = 'auto';
             this.style.height = this.scrollHeight + 'px';
         });
@@ -2653,7 +2699,7 @@
         // Keyboard shortcuts for swiping
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('homeScreen').classList.contains('active')) {
-                switch(e.key) {
+                switch (e.key) {
                     case 'ArrowLeft':
                         e.preventDefault();
                         swipeCard('left');
@@ -2681,21 +2727,28 @@
         }, false);
 
         // Prevent pull to refresh
-        document.body.addEventListener('touchstart', e => {
-            if (e.touches.length !== 1) { return; }
-            const scrollY = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
-            if (scrollY === 0) {
-                e.preventDefault();
-            }
-        }, { passive: false });
+        // Disable pull-to-refresh by preventing overscroll on the root element
+        (function () {
+            let startY = 0;
 
-        document.body.addEventListener('touchmove', e => {
-            if (e.touches.length !== 1) { return; }
-            const scrollY = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
-            if (scrollY === 0) {
-                e.preventDefault();
-            }
-        }, { passive: false });
+            window.addEventListener('touchstart', e => {
+                if (e.touches.length !== 1) return;
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+
+            window.addEventListener('touchmove', e => {
+                if (e.touches.length !== 1) return;
+
+                const scrollY = window.scrollY || window.pageYOffset;
+                const currentY = e.touches[0].clientY;
+                const isScrollingUp = currentY > startY;
+
+                if (scrollY === 0 && isScrollingUp) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        })();
+
 
         // Handle device orientation change
         window.addEventListener('orientationchange', () => {
@@ -2752,7 +2805,8 @@
     </script>
 
     <!-- PWA Manifest -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkFkdFUgQ3J1c2ggQ29ubmVjdCIsCiAgInNob3J0X25hbWUiOiAiQWR0VSBDcnVzaCIsCiAgImRlc2NyaXB0aW9uIjogIkNvbm5lY3Qgd2l0aCBmZWxsb3cgQWR0VSBzdHVkZW50cyIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjNjY3ZWVhIiwKICAidGhlbWVfY29sb3IiOiAiIzY2N2VlYSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB3aWR0aD0nMTkyJyBoZWlnaHQ9JzE5Micgdmlld0JveD0nMCAwIDE5MiAxOTInJTNFJTNDY2lyY2xlIGN4PSc5NicgY3k9Jzk2JyByPSc5NicgZmlsbD0nJTIzNjY3ZWVhJy8lM0UlM0N0ZXh0IHg9Jzk2JyB5PSc5NicgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzgwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBkeT0nLjNlbScgZmlsbD0nd2hpdGUnJTNFJUYwJTlGJTkyJTk2JTNDJTJGdGV4dCUzRSUzQyUyRnN2ZyUzRSIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MTInIGhlaWdodD0nNTEyJyB2aWV3Qm94PScwIDAgNTEyIDUxMiclM0UlM0NjaXJjbGUgY3g9JzI1NicgY3k9JzI1Nicgcj0nMjU2JyBmaWxsPSclMjM2NjdlZWEnLyUzRSUzQ3RleHQgeD0nMjU2JyB5PSc5NicgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzIwMCcgdGV4dC1hbmNob3I9J21pZGRsZScgZHk9Jy4zZW0nIGZpbGw9J3doaXRlJyUzRSVGMCU5RiU5MiU5NiUzQyUyRnRleHQlM0UlM0MlMkZzdmclM0UiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiCiAgICB9CiAgXQp9">
+    <link rel="manifest"
+        href="data:application/json;base64,ewogICJuYW1lIjogIkFkdFUgQ3J1c2ggQ29ubmVjdCIsCiAgInNob3J0X25hbWUiOiAiQWR0VSBDcnVzaCIsCiAgImRlc2NyaXB0aW9uIjogIkNvbm5lY3Qgd2l0aCBmZWxsb3cgQWR0VSBzdHVkZW50cyIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjNjY3ZWVhIiwKICAidGhlbWVfY29sb3IiOiAiIzY2N2VlYSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB3aWR0aD0nMTkyJyBoZWlnaHQ9JzE5Micgdmlld0JveD0nMCAwIDE5MiAxOTInJTNFJTNDY2lyY2xlIGN4PSc5NicgY3k9Jzk2JyByPSc5NicgZmlsbD0nJTIzNjY3ZWVhJy8lM0UlM0N0ZXh0IHg9Jzk2JyB5PSc5NicgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzgwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBkeT0nLjNlbScgZmlsbD0nd2hpdGUnJTNFJUYwJTlGJTkyJTk2JTNDJTJGdGV4dCUzRSUzQyUyRnN2ZyUzRSIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MTInIGhlaWdodD0nNTEyJyB2aWV3Qm94PScwIDAgNTEyIDUxMiclM0UlM0NjaXJjbGUgY3g9JzI1NicgY3k9JzI1Nicgcj0nMjU2JyBmaWxsPSclMjM2NjdlZWEnLyUzRSUzQ3RleHQgeD0nMjU2JyB5PSc5NicgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzIwMCcgdGV4dC1hbmNob3I9J21pZGRsZScgZHk9Jy4zZW0nIGZpbGw9J3doaXRlJyUzRSVGMCU5RiU5MiU5NiUzQyUyRnRleHQlM0UlM0MlMkZzdmclM0UiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiCiAgICB9CiAgXQp9">
 
     <!-- Meta tags for mobile optimization -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -2763,13 +2817,15 @@
 
     <!-- iOS specific meta tags -->
     <meta name="apple-touch-fullscreen" content="yes">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><circle cx='90' cy='90' r='90' fill='%23667eea'/><text x='90' y='90' font-family='Arial, sans-serif' font-size='72' text-anchor='middle' dy='.3em' fill='white'>💖</text></svg>">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><circle cx='90' cy='90' r='90' fill='%23667eea'/><text x='90' y='90' font-family='Arial, sans-serif' font-size='72' text-anchor='middle' dy='.3em' fill='white'>💖</text></svg>">
 
     <!-- Additional PWA meta tags -->
     <meta name="application-name" content="AdtU Crush Connect">
     <meta name="msapplication-TileColor" content="#667eea">
-    <meta name="msapplication-TileImage" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='144' height='144' viewBox='0 0 144 144'><circle cx='72' cy='72' r='72' fill='%23667eea'/><text x='72' y='72' font-family='Arial, sans-serif' font-size='58' text-anchor='middle' dy='.3em' fill='white'>💖</text></svg>">
-    
+    <meta name="msapplication-TileImage"
+        content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='144' height='144' viewBox='0 0 144 144'><circle cx='72' cy='72' r='72' fill='%23667eea'/><text x='72' y='72' font-family='Arial, sans-serif' font-size='58' text-anchor='middle' dy='.3em' fill='white'>💖</text></svg>">
+
     <style>
         /* Additional mobile-specific CSS */
         @media screen and (max-width: 430px) {
@@ -2789,7 +2845,9 @@
         }
 
         /* Prevent text selection on mobile */
-        .profile-card, .swipe-btn, .nav-item {
+        .profile-card,
+        .swipe-btn,
+        .nav-item {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -2797,7 +2855,8 @@
         }
 
         /* Smooth scrolling for all scrollable areas */
-        .scrollable-content, .chat-messages {
+        .scrollable-content,
+        .chat-messages {
             scroll-behavior: smooth;
         }
 
@@ -2806,7 +2865,7 @@
             .profile-card {
                 border: 2px solid #000;
             }
-            
+
             .bottom-nav {
                 border-top: 2px solid #000;
             }
@@ -2814,6 +2873,7 @@
 
         /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
+
             .profile-card,
             .nav-icon,
             .swipe-btn,
@@ -2906,5 +2966,5 @@
         }
     </style>
 </body>
-</html>
 
+</html>
